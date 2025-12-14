@@ -4,17 +4,54 @@
     <script type="module"
       src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
     </script>
+    <style>
+      body { margin:0; overflow:hidden; }
+      #ar-button {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 15px 25px;
+        font-size: 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        z-index: 1000;
+        cursor: pointer;
+      }
+      #instructions {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+        color: #ff0000;
+        background-color: rgba(255,255,255,0.8);
+        padding: 5px 10px;
+        border-radius: 5px;
+        z-index: 1000;
+      }
+    </style>
   </head>
 
-  <body style="margin:0;">
+  <body>
+    <div id="instructions">Tap the button below to place Hello World in AR</div>
+
     <model-viewer
-  src="hello_world.glb"
-  ios-src="hello_world.usdz"
-  ar
-  ar-modes="scene-viewer quick-look webxr"
-  camera-controls
-  ar-scale="fixed"
-  style="width:100vw; height:100vh;">
-</model-viewer>
+      id="mv"
+      src="hello_world.glb"
+      ios-src="hello_world.usdz"
+      ar
+      ar-modes="scene-viewer quick-look webxr"
+      camera-controls
+      auto-rotate
+      ar-scale="fixed"
+      style="width:100vw; height:100vh;">
+    </model-viewer>
+
+    <button id="ar-button" onclick="document.querySelector('#mv').enterAR();">
+      View in AR
+    </button>
   </body>
 </html>
