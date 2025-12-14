@@ -7,16 +7,6 @@
     <style>
       body { margin:0; overflow:hidden; font-family:sans-serif; }
       
-      #cameraFeed {
-        position: fixed;
-        top:0;
-        left:0;
-        width:100vw;
-        height:100vh;
-        object-fit: cover;
-        z-index: -1; /* behind everything */
-      }
-
       #ar-button {
         position: fixed;
         bottom: 20px;
@@ -49,11 +39,9 @@
   </head>
 
   <body>
-    <video id="cameraFeed" autoplay playsinline></video>
-
     <div id="instructions">
-      iPhone: Use Safari, tap the AR button, ensure enough light.<br>
-      Android: Use Chrome on ARCore-supported device.
+      iPhone: Use Safari and tap the button below.<br>
+      Android: Use Chrome on an ARCore-supported device.
     </div>
 
     <model-viewer
@@ -71,18 +59,5 @@
     <button id="ar-button" onclick="document.querySelector('#mv').enterAR();">
       View in AR
     </button>
-
-    <script>
-      // Request camera feed
-      async function startCamera() {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
-          document.getElementById('cameraFeed').srcObject = stream;
-        } catch(e) {
-          console.log('Camera not available or permission denied', e);
-        }
-      }
-      startCamera();
-    </script>
   </body>
 </html>
